@@ -1,24 +1,43 @@
-#file that find all the urls necessary to create database
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from players import *
-from General_Funcs import *
+from webdriver_utils import get_webdriver
+from config import SCHEDULE_URL
+import time
 
-schedule_url = 'https://www.wnba.com/schedule?season=2024&month=all'
-path = '/Users/usmantahir/Github_Clones/chromedriver'
-service = Service(executable_path=path)
-driver = webdriver.Chrome(service=service)
+#Returns boxscore links from WNBA schedule page, given the url
+def get_boxscore_links(url):
+        
+    driver = get_webdriver()
+    driver.get(url)
+        
+    all_game_cards = []
+    # Scroll loop to collect game cards
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    while True:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(5)  # Wait for new content to load
 
-driver.get(schedule_url)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, 'GameSection_GameSection__CDIMc'))
+        )
+        game_cards = driver.find_elements(By.CLASS_NAME, '_GameTile__container_12tan_23')
+        all_game_cards.extend(game_cards)
+        
+        if new_height == last_height:
+            break
+        last_height = new_height
+    all_game_cards = list(set(all_game_cards))
 
-WebDriverWait(driver, 20).until(
-    EC.presence_of_all_elements_located((By.CLASS_NAME, ''))
-)
+    boxscore_links = []
 
-boxscore_link = driver.find_element(By.CLASS_NAME, '')
-arr = [element.text for element in boxscore_link]
-print(arr)
-#team_names_text = [team.text for team in team_names]
+    for game in all_game_cards:
+        link_element = game.find_element(By.CLASS_NAME, "_GameTile__game_12tan_30")
+        link = link_element.get_attribute("href") + '/boxscore'
+        boxscore_links.append(link)
+
+    print(f"Number of Boxscore Links: {len(boxscore_links)}")
+    driver.quit()
+    
+    return boxscore_links
