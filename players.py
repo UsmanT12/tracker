@@ -37,7 +37,7 @@ players = [
     'Bridget Carleton',
     'Kayla McBride',
     'Courtney Williams',
-    'Alanah Smith',
+    'Alanna Smith',
     
     # LAS
     'Dearica Hamby',
