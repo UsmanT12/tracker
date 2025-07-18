@@ -1,3 +1,8 @@
+import sys
+import os
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, parent_dir)
+
 from config import *
 import psycopg2
 from General_Funcs import populate_box_score_table
