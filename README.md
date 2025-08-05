@@ -1,1 +1,1 @@
-.tracker app for WNBA players
+Stats tracker for WNBA players
