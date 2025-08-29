@@ -26,8 +26,16 @@ def insert_game_data(url):
 
     team1_stats, team2_stats = populate_box_score_table(url)
     
+    # Get team names for determining opposing team
+    team1_name = team1_stats[0].get('TEAM', '') if team1_stats else ''
+    team2_name = team2_stats[0].get('TEAM', '') if team2_stats else ''
+    
     # Insert each player's stats
     for player_data in team1_stats + team2_stats:
+        # Determine opposing team
+        player_team = player_data.get('TEAM', '')
+        opposing_team = team2_name if player_team == team1_name else team1_name
+        
         # Function to split shot attempts into made and attempted
         def split_shots(shot_string, default=(0,0)):
             try:
@@ -47,6 +55,7 @@ def insert_game_data(url):
         clean_data = {
             'player': player_data.get('PLAYER', ''),
             'team': player_data.get('TEAM', ''),
+            'opponent': opposing_team,
             'date': player_data.get('DATE', None),
             'min': player_data.get('MIN', '0'),
             'fgm': fgm,
@@ -72,13 +81,13 @@ def insert_game_data(url):
         
         cursor.execute("""
             INSERT INTO player_stats (
-                player, team, game_date, minutes, 
+                player, team, opponent, game_date, minutes, 
                 fgm, fga, fg_pct, tpm, tpa, tp_pct, 
                 ftm, fta, ft_pct, plus_minus, 
                 oreb, dreb, reb, ast, pf, stl, tov, blk, pts
             ) 
             VALUES (
-                %(player)s, %(team)s, %(date)s, %(min)s, 
+                %(player)s, %(team)s, %(opponent)s, %(date)s, %(min)s, 
                 %(fgm)s, %(fga)s, %(fgpct)s, %(tpm)s, %(tpa)s, %(tppct)s, 
                 %(ftm)s, %(fta)s, %(ftpct)s, %(plusminus)s,
                 %(oreb)s, %(dreb)s, %(reb)s, %(ast)s, %(pf)s, 
@@ -86,6 +95,7 @@ def insert_game_data(url):
             )
             ON CONFLICT (player, team, game_date) 
             DO UPDATE SET
+                opponent = EXCLUDED.opponent,
                 minutes = EXCLUDED.minutes,
                 fgm = EXCLUDED.fgm,
                 fga = EXCLUDED.fga,
