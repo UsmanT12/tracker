@@ -1,0 +1,2 @@
+"""WNBA ingestion source adapters."""
+

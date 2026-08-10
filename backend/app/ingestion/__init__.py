@@ -1,0 +1,2 @@
+"""Independent WNBA data ingestion."""
+

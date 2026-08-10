@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: wnba_stats
+      POSTGRES_USER: wnba_user
+      POSTGRES_PASSWORD: change_me
+    ports:
+      - "5432:5432"
+    volumes:
+      - wnba_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wnba_user -d wnba_stats"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  wnba_postgres_data:
+

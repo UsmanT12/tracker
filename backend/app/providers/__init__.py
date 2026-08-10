@@ -1,0 +1,2 @@
+"""Player catalog provider boundary."""
+
