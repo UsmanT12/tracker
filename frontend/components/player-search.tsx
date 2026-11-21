@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { getPlayers } from "@/lib/api";
@@ -51,10 +51,10 @@ export function PlayerSearch({
   }, [initialPlayers, initialSeason, initialTotal, search, season]);
 
   return (
-    <section aria-labelledby="players-heading">
+    <section aria-label="Players">
       <div className="toolbar">
         <label>
-          <span className="field-label">Find a player</span>
+          <span className="sr-only">Find a player</span>
           <span className="search-wrap">
             <Search size={19} aria-hidden="true" />
             <input
@@ -66,10 +66,9 @@ export function PlayerSearch({
             />
           </span>
         </label>
-        <SeasonSelect seasons={seasons} value={season} onChange={setSeason} />
+        <SeasonSelect hideLabel seasons={seasons} value={season} onChange={setSeason} />
       </div>
-      <div className="section-heading">
-        <h2 id="players-heading">Player index</h2>
+      <div className="section-heading player-results" role="status">
         <span>{loading ? "Updating…" : `${total} players`}</span>
       </div>
       {error ? <div className="error-state">{error}</div> : null}
@@ -84,14 +83,17 @@ export function PlayerSearch({
               href={`/players/${player.id}?season=${season}&stat=pts`}
               key={player.id}
             >
-              <div className="player-team">
-                {player.team_abbreviation ?? player.team_name ?? "WNBA"}
+              <div className="player-card-heading">
+                <span className="player-team">
+                  {player.team_name ?? player.team_abbreviation ?? "WNBA"}
+                </span>
+                <ArrowUpRight size={17} aria-hidden="true" />
               </div>
               <div className="player-name">{player.display_name}</div>
               <div className="mini-stats">
-                <span><strong>{player.ppg?.toFixed(1) ?? "—"}</strong> PPG</span>
-                <span><strong>{player.rpg?.toFixed(1) ?? "—"}</strong> RPG</span>
-                <span><strong>{player.apg?.toFixed(1) ?? "—"}</strong> APG</span>
+                <span><strong>{player.ppg?.toFixed(1) ?? "—"}</strong><small>PPG</small></span>
+                <span><strong>{player.rpg?.toFixed(1) ?? "—"}</strong><small>RPG</small></span>
+                <span><strong>{player.apg?.toFixed(1) ?? "—"}</strong><small>APG</small></span>
               </div>
             </Link>
           ))}

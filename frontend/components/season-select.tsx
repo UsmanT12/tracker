@@ -4,12 +4,13 @@ interface SeasonSelectProps {
   seasons: number[];
   value: number;
   onChange: (season: number) => void;
+  hideLabel?: boolean;
 }
 
-export function SeasonSelect({ seasons, value, onChange }: SeasonSelectProps) {
+export function SeasonSelect({ seasons, value, onChange, hideLabel = false }: SeasonSelectProps) {
   return (
     <label>
-      <span className="field-label">Season</span>
+      <span className={hideLabel ? "sr-only" : "field-label"}>Season</span>
       <select
         aria-label="Season"
         className="select"
