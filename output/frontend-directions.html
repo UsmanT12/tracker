@@ -1,0 +1,295 @@
+<div id="baseline-directions">
+  <style>
+    #baseline-directions { color-scheme:light dark; }
+    #baseline-directions * { box-sizing:border-box; }
+    #baseline-directions [hidden] { display:none !important; }
+    #baseline-directions .product { --paper:light-dark(#f6f3eb,#201f1b); --ink:light-dark(#20211c,#f1eee5); --sub:light-dark(#66675e,#b3b3a5); --line:light-dark(#d7d5ca,#48483d); --panel:light-dark(#eeece3,#292a23); --brand:#bb401f; --positive:light-dark(#29654b,#92c8a8); --negative:light-dark(#a14337,#e49a8f); background:var(--paper); color:var(--ink); min-height:770px; font:14px/1.45 Arial,Helvetica,sans-serif; padding:0 34px 24px; }
+    #baseline-directions .product button, #baseline-directions .product input, #baseline-directions .product select { font:inherit; color:inherit; }
+    #baseline-directions .product button, #baseline-directions .product select { cursor:pointer; }
+    #baseline-directions .product button { background:none; border:0; padding:0; text-align:left; }
+    #baseline-directions .top { display:flex; align-items:center; gap:28px; min-height:78px; border-bottom:1px solid var(--line); }
+    #baseline-directions .wordmark { font-size:25px; font-weight:800; letter-spacing:-1.5px; }
+    #baseline-directions .brand-dot { color:var(--brand); }
+    #baseline-directions .topnav { display:flex; gap:22px; flex:1; color:var(--sub); font-size:12px; }
+    #baseline-directions .active-nav { color:var(--ink); border-bottom:2px solid var(--brand); padding-bottom:5px; }
+    #baseline-directions .edition { font:11px/1.4 ui-monospace,SFMono-Regular,monospace; letter-spacing:.06em; text-transform:uppercase; }
+    #baseline-directions .muted { color:var(--sub); }
+    #baseline-directions .season { background:var(--paper); border:1px solid var(--line); padding:8px 10px; border-radius:0; }
+    #baseline-directions .kicker { font:11px/1.5 ui-monospace,SFMono-Regular,monospace; text-transform:uppercase; letter-spacing:.12em; color:var(--sub); }
+    #baseline-directions h1, #baseline-directions h2, #baseline-directions h3, #baseline-directions p { margin:0; }
+    #baseline-directions .serif { font-family:Georgia,'Times New Roman',serif; font-weight:400; }
+    #baseline-directions .number { font-variant-numeric:tabular-nums; }
+    #baseline-directions .headrow { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; }
+    #baseline-directions .player-title { font-size:clamp(35px,5vw,63px); line-height:1.06; letter-spacing:-2px; margin:10px 0; }
+    #baseline-directions .metricbar { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    #baseline-directions .metric { padding:8px 13px !important; border-bottom:2px solid transparent !important; color:var(--sub) !important; font-size:12px !important; }
+    #baseline-directions .metric[aria-pressed=true] { border-bottom-color:var(--brand) !important; color:var(--ink) !important; font-weight:700 !important; }
+    #baseline-directions .split { display:grid; grid-template-columns:190px minmax(0,1fr); gap:32px; }
+    #baseline-directions .roster { border-right:1px solid var(--line); padding-right:20px; }
+    #baseline-directions .search { width:100%; background:transparent; border:0; border-bottom:1px solid var(--line); padding:10px 0; margin:14px 0; outline-offset:3px; }
+    #baseline-directions .roster-item { display:block; width:100%; padding:15px 0 !important; border-bottom:1px solid var(--line) !important; }
+    #baseline-directions .roster-item[aria-pressed=true] .roster-name { color:var(--brand); }
+    #baseline-directions .roster-name { display:block; font-weight:700; font-size:13px; }
+    #baseline-directions .roster-team { display:block; color:var(--sub); font-size:11px; margin-top:3px; }
+    #baseline-directions .stats { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:20px; padding:24px 0; margin:16px 0 8px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    #baseline-directions .stat-value { display:block; font-size:32px; line-height:1.15; margin-top:5px; letter-spacing:-1px; }
+    #baseline-directions .stats .lead .stat-value { font-size:48px; }
+    #baseline-directions .chart-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin:24px 0 14px; }
+    #baseline-directions .chart-heading h3 { font-size:14px; font-weight:600; }
+    #baseline-directions .chart { height:170px; position:relative; padding:0 3px; margin-top:12px; }
+    #baseline-directions .bars { display:flex; align-items:flex-end; height:100%; gap:9px; position:relative; }
+    #baseline-directions .bar { flex:1; background:var(--ink) !important; height:var(--height); min-width:0; position:relative; opacity:.8; }
+    #baseline-directions .bar.above { background:var(--brand) !important; }
+    #baseline-directions .bar[aria-pressed=true] { outline:2px solid var(--ink); outline-offset:3px; opacity:1; }
+    #baseline-directions .bar span { position:absolute; bottom:calc(100% + 3px); left:0; width:100%; text-align:center; font-size:11px; font-variant-numeric:tabular-nums; }
+    #baseline-directions .average-rule { position:absolute; width:100%; border-top:1px dashed var(--sub); z-index:1; pointer-events:none; }
+    #baseline-directions .axis { display:flex; justify-content:space-between; padding-top:9px; color:var(--sub); font:11px ui-monospace,SFMono-Regular,monospace; }
+    #baseline-directions .game-detail { color:var(--sub); font-size:12px; min-height:36px; padding-top:12px; }
+    #baseline-directions .game-strip { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); margin-top:10px; }
+    #baseline-directions .game-cell { padding:13px 10px 3px 0; }
+    #baseline-directions .game-cell strong { display:block; font-size:22px; margin-top:5px; }
+    #baseline-directions .foot { margin-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:10px; color:var(--sub); }
+    #baseline-directions .direction { display:inline-block; padding:5px 8px; border:1px solid var(--line); font:10px ui-monospace,SFMono-Regular,monospace; text-transform:uppercase; letter-spacing:.04em; }
+    #baseline-directions .editorial .intro { padding:20px 0 22px; }
+    #baseline-directions .editorial .intro h2 { font-size:30px; letter-spacing:-1px; line-height:1.15; margin:7px 0 0; }
+    #baseline-directions .editorial .roster { padding-top:3px; }
+    #baseline-directions .editorial .player-title { font-style:italic; font-size:clamp(35px,5vw,52px); }
+    #baseline-directions .editorial .detail-top { display:flex; justify-content:space-between; gap:16px; }
+    #baseline-directions .editorial .jersey { background:var(--brand); color:#fff6eb; min-width:64px; height:78px; display:grid; place-items:center; font:48px Georgia,serif; }
+    #baseline-directions .editorial .metricbar { margin:18px 0 0; }
+    #baseline-directions .film { --paper:light-dark(#e9e9e4,#151817); --ink:light-dark(#1c211e,#eceee9); --sub:light-dark(#626a61,#a4afa6); --line:light-dark(#c4cbc1,#38413a); --panel:light-dark(#dce1d9,#202722); --brand:light-dark(#416039,#c2d997); padding:0; }
+    #baseline-directions .film .top { min-height:70px; padding:0 28px; }
+    #baseline-directions .film .wordmark { font-size:22px; letter-spacing:-1px; }
+    #baseline-directions .film-shell { display:grid; grid-template-columns:170px minmax(0,1fr); min-height:640px; }
+    #baseline-directions .film .roster { border-right:1px solid var(--line); padding:25px 18px; background:var(--panel); }
+    #baseline-directions .film .roster-item { border:0 !important; padding:13px 0 !important; }
+    #baseline-directions .film-content { padding:28px; min-width:0; }
+    #baseline-directions .film .player-title { font-size:44px; letter-spacing:-1.8px; font-weight:700; }
+    #baseline-directions .film .section-label { border-top:1px solid var(--line); padding-top:16px; margin-bottom:10px; }
+    #baseline-directions .film .metricbar { margin-top:24px; border-bottom:1px solid var(--line); gap:5px; }
+    #baseline-directions .film .stats { margin-top:0; border-top:0; grid-template-columns:1.4fr 1fr 1fr; }
+    #baseline-directions .film .stat-value { font-family:ui-monospace,SFMono-Regular,monospace; font-size:28px; }
+    #baseline-directions .film .stats .lead .stat-value { font-size:45px; }
+    #baseline-directions .film .bar { opacity:.5; }
+    #baseline-directions .film .bar.above { opacity:1; }
+    #baseline-directions .film .game-strip { gap:8px; border:0; }
+    #baseline-directions .film .game-cell { background:var(--panel); padding:12px; border-radius:var(--tile-radius,2px); }
+    #baseline-directions .film .game-cell strong { font-family:ui-monospace,SFMono-Regular,monospace; }
+    #baseline-directions .film .foot { padding:0 28px 22px; margin-top:0; }
+    #baseline-directions .box { --paper:light-dark(#fff,#171b20); --ink:light-dark(#172331,#e4ebf3); --sub:light-dark(#5b6875,#a3b2c2); --line:light-dark(#dce1e6,#3c4753); --panel:light-dark(#f2f5f7,#252d36); --brand:light-dark(#254eaf,#8db2ff); }
+    #baseline-directions .box .wordmark { font-family:ui-monospace,SFMono-Regular,monospace; font-size:20px; letter-spacing:-1px; }
+    #baseline-directions .box .intro { padding:28px 0 18px; }
+    #baseline-directions .box .intro h2 { font-size:27px; letter-spacing:-1px; font-weight:650; margin-top:6px; }
+    #baseline-directions .table-toolbar { display:flex; justify-content:space-between; align-items:center; gap:16px; border-top:1px solid var(--line); padding:12px 0; }
+    #baseline-directions .box .search { width:240px; margin:0; padding:7px 0; }
+    #baseline-directions .table-container { overflow-x:auto; }
+    #baseline-directions .box table { border-collapse:collapse; width:100%; text-align:left; font-size:12px; }
+    #baseline-directions .box th { font-size:10px; color:var(--sub); font-weight:500; letter-spacing:.06em; padding:10px 12px; border-block:1px solid var(--line); text-transform:uppercase; background:var(--panel); }
+    #baseline-directions .box td { padding:var(--row-space,13px) 12px; border-bottom:1px solid var(--line); }
+    #baseline-directions .box td.num, #baseline-directions .box th.num { text-align:right; font-family:ui-monospace,SFMono-Regular,monospace; font-variant-numeric:tabular-nums; }
+    #baseline-directions .box tr.selected { background:var(--panel); }
+    #baseline-directions .box tr.selected td:first-child { box-shadow:inset 3px 0 var(--brand); }
+    #baseline-directions .box .table-player { font-weight:650; white-space:nowrap; }
+    #baseline-directions .box .table-player[aria-pressed=true] { color:var(--brand); }
+    #baseline-directions .box .detail { display:grid; grid-template-columns:200px minmax(0,1fr); gap:28px; margin-top:30px; border-top:2px solid var(--ink); padding-top:20px; }
+    #baseline-directions .box .player-title { font-size:29px; letter-spacing:-1px; }
+    #baseline-directions .box .mini-average { font:36px/1.2 ui-monospace,SFMono-Regular,monospace; margin:20px 0 5px; }
+    #baseline-directions .box .chart { height:140px; }
+    #baseline-directions .box .chart-heading { margin-top:12px; }
+    #baseline-directions .box .metricbar { gap:0; }
+    #baseline-directions .box .metric { padding:7px 12px !important; }
+    #baseline-directions .box .bar { opacity:.25; }
+    #baseline-directions .box .bar.above { opacity:1; }
+    #baseline-directions .product { min-height:1020px; }
+    @media (max-width:760px) {
+      #baseline-directions .product { padding-inline:20px; min-height:1120px; }
+      #baseline-directions .top { gap:18px; }
+      #baseline-directions .topnav { gap:15px; }
+      #baseline-directions .top .edition { display:none; }
+      #baseline-directions .split { grid-template-columns:150px minmax(0,1fr); gap:20px; }
+      #baseline-directions .film { padding:0; }
+      #baseline-directions .film-shell { grid-template-columns:145px minmax(0,1fr); }
+      #baseline-directions .film-content { padding:24px 20px; }
+      #baseline-directions .film .player-title { font-size:36px; }
+      #baseline-directions .stats { gap:12px; }
+      #baseline-directions .stat-value { font-size:26px; }
+      #baseline-directions .stats .lead .stat-value { font-size:38px; }
+      #baseline-directions .bars { gap:6px; }
+      #baseline-directions .box .detail { grid-template-columns:170px minmax(0,1fr); gap:20px; }
+    }
+    @media (max-width:540px) {
+      #baseline-directions .product { min-height:1390px; padding-inline:16px; }
+      #baseline-directions .topnav { font-size:11px; gap:13px; }
+      #baseline-directions .top { min-height:65px; flex-wrap:wrap; gap:12px; }
+      #baseline-directions .wordmark { font-size:23px; }
+      #baseline-directions .topnav { justify-content:flex-end; }
+      #baseline-directions .split { display:block; }
+      #baseline-directions .roster { border-right:0; padding-right:0; margin-bottom:25px; }
+      #baseline-directions .roster-items { display:grid; grid-template-columns:1fr 1fr; column-gap:16px; }
+      #baseline-directions .roster-item { padding:10px 0 !important; }
+      #baseline-directions .editorial .intro h2 { font-size:31px; }
+      #baseline-directions .editorial .intro { padding:22px 0; }
+      #baseline-directions .editorial .jersey { display:none; }
+      #baseline-directions .player-title { font-size:42px; }
+      #baseline-directions .stats { grid-template-columns:1.2fr 1fr 1fr; gap:10px; }
+      #baseline-directions .stats .kicker { font-size:10px; letter-spacing:.03em; }
+      #baseline-directions .stat-value, #baseline-directions .film .stat-value { font-size:25px; }
+      #baseline-directions .stats .lead .stat-value, #baseline-directions .film .stats .lead .stat-value { font-size:36px; }
+      #baseline-directions .chart { height:150px; }
+      #baseline-directions .bars { gap:5px; }
+      #baseline-directions .bar span { font-size:10px; }
+      #baseline-directions .game-strip { grid-template-columns:1fr 1fr; }
+      #baseline-directions .film { padding:0; }
+      #baseline-directions .film-shell { display:block; }
+      #baseline-directions .film .roster { padding:15px 16px 0; margin:0; }
+      #baseline-directions .film .roster .section-label, #baseline-directions .film .roster .season { display:none; }
+      #baseline-directions .film .roster-items { grid-template-columns:1fr 1fr; }
+      #baseline-directions .film-content { padding:20px 16px; }
+      #baseline-directions .film .top { padding-inline:16px; }
+      #baseline-directions .film .foot { padding-inline:16px; }
+      #baseline-directions .box .detail { display:block; margin-top:24px; }
+      #baseline-directions .box .mini-average { margin-top:10px; }
+      #baseline-directions .box .table-toolbar { align-items:flex-start; flex-direction:column; gap:10px; }
+      #baseline-directions .box .search { width:100%; }
+      #baseline-directions .box table { min-width:465px; }
+      #baseline-directions .box .detail .metricbar { margin-top:20px; }
+      #baseline-directions .box .table-container { margin-inline:-4px; }
+    }
+    @media (pointer:coarse) { #baseline-directions .product button { min-height:44px; } #baseline-directions .bars .bar { min-height:0; } }
+  </style>
+  <div class="viz-carousel" aria-label="Baseline frontend design directions">
+    <section data-variant="Courtside" aria-label="Courtside editorial design">
+      <div class="product editorial" data-design="editorial" aria-label="Courtside styling">
+        <header class="top"><div class="wordmark">baseline<span class="brand-dot">.</span></div><div class="topnav"><span class="active-nav">Players</span><span>WNBA archive</span></div><span class="edition">The statistical record</span></header>
+        <div class="intro headrow"><div><div class="kicker">WNBA / Player index</div><h2 class="serif">The season, by the numbers.</h2></div><label class="kicker">Season <select class="season" aria-label="Courtside season"><option>2026</option><option>2025</option><option>2024</option></select></label></div>
+        <div class="split">
+          <aside class="roster"><div class="kicker">The players</div><input class="search" placeholder="Find a player…" aria-label="Search Courtside players"><div class="roster-items"></div></aside>
+          <main class="detail">
+            <div class="detail-top"><div><div class="kicker"><span data-team>Las Vegas Aces</span> / <span data-season>2026</span></div><h1 class="player-title serif" data-name>A’ja Wilson</h1><p class="muted"><span data-games>49</span> games played · Season performance</p></div><div class="jersey" data-jersey>22</div></div>
+            <div class="metricbar" aria-label="Courtside statistic"></div>
+            <div class="stats number"><div class="lead"><span class="kicker">Season average</span><strong class="stat-value" data-average>25.9</strong></div><div><span class="kicker">Season high</span><strong class="stat-value" data-high>42</strong></div><div><span class="kicker">Latest game</span><strong class="stat-value" data-latest>29</strong></div></div>
+            <div class="chart-heading"><h3><span data-stat-label>Points</span>, game by game</h3><span class="kicker">— — Season average</span></div><div class="chart"><div class="average-rule"></div><div class="bars" role="group" aria-label="Recent game statistics"></div></div><div class="axis"><span>LAST 12 GAMES</span><span>MOST RECENT →</span></div><div class="game-detail" aria-live="polite"></div>
+            <div class="game-strip"></div>
+          </main>
+        </div>
+        <footer class="foot"><span class="direction">Courtside · Editorial / ink / terracotta</span><span>Design preview · Sample statistics</span></footer>
+      </div>
+    </section>
+    <section data-variant="Film Room" aria-label="Film Room analysis workspace" hidden>
+      <div class="product film" data-design="film" aria-label="Film Room styling">
+        <header class="top"><div class="wordmark">BASELINE<span class="brand-dot"> /</span></div><div class="topnav"><span class="active-nav">Film room</span><span>WNBA</span></div><span class="edition">Player performance archive</span></header>
+        <div class="film-shell">
+          <aside class="roster"><label class="kicker">Season <select class="season" aria-label="Film Room season"><option>2026</option><option>2025</option><option>2024</option></select></label><input class="search" aria-label="Search Film Room players" placeholder="Find a player…"><div class="kicker section-label">Players</div><div class="roster-items"></div></aside>
+          <main class="film-content">
+            <div class="headrow"><div><div class="kicker"><span data-team>Las Vegas Aces</span> · <span data-season>2026</span></div><h1 class="player-title" data-name>A’ja Wilson</h1><p class="muted"><span data-games>49</span> games played</p></div><span class="edition muted">Season review</span></div>
+            <div class="metricbar" aria-label="Film Room statistic"></div>
+            <div class="stats number"><div class="lead"><span class="kicker">Average / game</span><strong class="stat-value" data-average>25.9</strong></div><div><span class="kicker">Season high</span><strong class="stat-value" data-high>42</strong></div><div><span class="kicker">Latest game</span><strong class="stat-value" data-latest>29</strong></div></div>
+            <div class="chart-heading"><h3><span data-stat-label>Points</span> / Last 12 games</h3><span class="kicker">— — Season average</span></div><div class="chart"><div class="average-rule"></div><div class="bars" role="group" aria-label="Recent game statistics"></div></div><div class="axis"><span>EARLIER</span><span>LATEST →</span></div><div class="game-detail" aria-live="polite"></div>
+            <div class="kicker section-label">Recent matchups</div><div class="game-strip"></div>
+          </main>
+        </div>
+        <footer class="foot"><span class="direction">Film Room · Utility / graphite / sage</span><span>Design preview · Sample statistics</span></footer>
+      </div>
+    </section>
+    <section data-variant="Box Score" aria-label="Box Score table first design" hidden>
+      <div class="product box" data-design="box" aria-label="Box Score styling">
+        <header class="top"><div class="wordmark">baseline_</div><div class="topnav"><span class="active-nav">Player index</span><span>WNBA</span></div><span class="edition">Statistics, without the noise.</span></header>
+        <div class="intro headrow"><div><div class="kicker">WNBA / Statistical archive</div><h2>Player season averages</h2></div><select class="season" aria-label="Box Score season"><option>2026</option><option>2025</option><option>2024</option></select></div>
+        <div class="table-toolbar"><input class="search" placeholder="Search player or team…" aria-label="Search Box Score players"><span class="kicker">Select a player to inspect games ↓</span></div>
+        <div class="table-container"><table aria-label="Player season averages"><thead><tr><th>Player</th><th>Team</th><th class="num">GP</th><th class="num">PTS</th><th class="num">REB</th><th class="num">AST</th></tr></thead><tbody class="player-table"></tbody></table></div>
+        <main class="detail"><div><div class="kicker">Selected player</div><h1 class="player-title" data-name>A’ja Wilson</h1><p class="muted" data-team>Las Vegas Aces</p><div class="mini-average number" data-average>25.9</div><span class="kicker"><span data-stat-label>Points</span> / game</span><p class="game-detail" aria-live="polite"></p></div><div><div class="metricbar" aria-label="Box Score statistic"></div><div class="chart-heading"><h3>Last 12 games</h3><span class="kicker">— — Season average</span></div><div class="chart"><div class="average-rule"></div><div class="bars" role="group" aria-label="Recent game statistics"></div></div><div class="axis"><span>EARLIER</span><span>LATEST →</span></div></div></main>
+        <footer class="foot"><span class="direction">Box Score · Table first / precise / cobalt</span><span>Design preview · Sample statistics</span></footer>
+      </div>
+    </section>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('baseline-directions');
+      const players = [
+        {name:'A’ja Wilson',team:'Las Vegas Aces',short:'LV',jersey:'22',gp:49,avg:[25.9,9.1,2.9],high:[42,18,9],points:[22,31,18,28,34,25,19,38,24,32,21,29],rebounds:[9,12,7,10,8,14,6,11,8,9,7,10],assists:[2,4,1,3,5,2,3,4,2,3,1,5]},
+        {name:'Caitlin Clark',team:'Indiana Fever',short:'IND',jersey:'22',gp:40,avg:[22.4,5.6,8.7],high:[37,12,19],points:[18,26,21,30,19,24,17,33,22,27,20,25],rebounds:[4,6,5,8,3,7,5,4,9,6,4,6],assists:[7,11,8,12,5,10,9,6,13,8,7,10]},
+        {name:'Napheesa Collier',team:'Minnesota Lynx',short:'MIN',jersey:'24',gp:41,avg:[23.2,8.4,3.3],high:[39,17,8],points:[20,25,18,29,27,22,31,19,24,28,21,26],rebounds:[8,10,6,9,12,7,11,8,5,10,9,7],assists:[3,4,2,5,3,2,4,3,5,2,3,4]},
+        {name:'Breanna Stewart',team:'New York Liberty',short:'NY',jersey:'30',gp:39,avg:[21.1,7.8,3.6],high:[38,16,9],points:[19,24,17,28,21,18,26,15,23,30,20,22],rebounds:[7,9,5,8,11,6,9,7,8,10,6,8],assists:[3,5,2,4,3,6,2,4,3,5,3,4]}
+      ];
+      const metrics = [{key:'points',label:'Points',tab:'PTS',index:0},{key:'rebounds',label:'Rebounds',tab:'REB',index:1},{key:'assists',label:'Assists',tab:'AST',index:2}];
+      const opponents=['NY','SEA','PHX','MIN','IND','ATL','CHI','DAL','CON','LA','SEA','PHX'];
+      const saved = globalThis.openai?.widgetState?.modelContent?.mockupSelections || {};
+      const selections = {};
+      root.querySelectorAll('[data-design]').forEach(product => {
+        const design = product.dataset.design;
+        const restore = saved[design] || {};
+        const state = {player:Math.max(0,players.findIndex(p=>p.name===restore.player)),metric:metrics.some(m=>m.key===restore.metric)?restore.metric:'points',season:['2026','2025','2024'].includes(restore.season)?restore.season:'2026',game:11,query:''};
+        selections[design] = state;
+        const picker = product.querySelector('.season');
+        picker.value=state.season;
+        const roster = product.querySelector('.roster-items');
+        const table = product.querySelector('.player-table');
+        const metricbar = product.querySelector('.metricbar');
+        const bars = product.querySelector('.bars');
+        const detail = product.querySelector('.game-detail');
+        function save() {
+          const model = {};
+          for (const [key,value] of Object.entries(selections)) model[key]={player:players[value.player].name,metric:value.metric,season:value.season};
+          globalThis.openai?.setWidgetState?.({modelContent:{mockupSelections:model},privateContent:null}).catch(()=>{});
+        }
+        function drawRoster() {
+          if (roster) roster.replaceChildren();
+          if (table) table.replaceChildren();
+          players.forEach((p,index) => {
+            if (!(p.name+' '+p.team).toLowerCase().includes(state.query)) return;
+            const button=document.createElement('button');
+            button.type='button'; button.setAttribute('aria-pressed',String(index===state.player));
+            button.addEventListener('click',()=>{state.player=index;render();save();});
+            if (roster) {
+              button.className='roster-item';
+              const name=document.createElement('span');name.className='roster-name';name.textContent=p.name;
+              const team=document.createElement('span');team.className='roster-team';team.textContent=p.team;
+              button.append(name,team);roster.append(button);
+            } else {
+              const row=document.createElement('tr');row.className=index===state.player?'selected':'';
+              const cell=document.createElement('td');button.className='table-player';button.textContent=p.name;cell.append(button);row.append(cell);
+              [p.short,p.gp,...p.avg.map(n=>n.toFixed(1))].forEach((value,i)=>{const c=document.createElement('td');c.textContent=String(value);if(i>0)c.className='num';row.append(c);});
+              table.append(row);
+            }
+          });
+        }
+        function updateDetail() {
+          const player=players[state.player];const metric=metrics.find(m=>m.key===state.metric);const value=player[metric.key][state.game];const avg=player.avg[metric.index];
+          detail.textContent='Game '+String(state.game+1).padStart(2,'0')+' · vs '+opponents[state.game]+' · '+value+' '+metric.tab+' · '+(value>=avg?'+':'')+(value-avg).toFixed(1)+' vs average';
+        }
+        function render() {
+          const p=players[state.player]; const metric=metrics.find(m=>m.key===state.metric);const data=p[metric.key];const average=p.avg[metric.index];const max=Math.max(...data,p.high[metric.index])*1.15;
+          const set=(selector,text)=>product.querySelectorAll(selector).forEach(el=>el.textContent=text);
+          set('[data-name]',p.name);set('[data-team]',p.team);set('[data-jersey]',p.jersey);set('[data-season]',state.season);set('[data-games]',String(p.gp));set('[data-average]',average.toFixed(1));set('[data-high]',String(p.high[metric.index]));set('[data-latest]',String(data[11]));set('[data-stat-label]',metric.label);
+          drawRoster();metricbar.replaceChildren();
+          metrics.forEach(m=>{const b=document.createElement('button');b.type='button';b.className='metric';b.textContent=m.tab;b.setAttribute('aria-pressed',String(m.key===state.metric));b.addEventListener('click',()=>{state.metric=m.key;render();save();});metricbar.append(b);});
+          bars.replaceChildren();
+          data.forEach((value,i)=>{const b=document.createElement('button');b.className='bar'+(value>=average?' above':'');b.type='button';b.style.setProperty('--height',value/max*100+'%');b.setAttribute('aria-label','Game '+(i+1)+', vs '+opponents[i]+', '+value+' '+metric.label.toLowerCase());b.setAttribute('aria-pressed',String(i===state.game));const label=document.createElement('span');label.textContent=String(value);b.append(label);b.addEventListener('click',()=>{state.game=i;bars.querySelectorAll('button').forEach((el,j)=>el.setAttribute('aria-pressed',String(j===i)));updateDetail();});bars.append(b);});
+          product.querySelector('.average-rule').style.bottom=average/max*100+'%';
+          const strip=product.querySelector('.game-strip');
+          if(strip){strip.replaceChildren();data.slice(-4).forEach((value,i)=>{const c=document.createElement('div');c.className='game-cell';const opp=document.createElement('span');opp.className='kicker';opp.textContent='vs '+opponents[i+8];const strong=document.createElement('strong');strong.className='number';strong.textContent=value+' '+metric.tab;const delta=document.createElement('span');delta.className='muted';delta.style.fontSize='11px';delta.textContent=(value>=average?'+':'')+(value-average).toFixed(1)+' vs avg';c.append(opp,strong,delta);strip.append(c);});}
+          updateDetail();
+        }
+        picker.addEventListener('change',()=>{state.season=picker.value;render();save();});
+        product.querySelector('.search').addEventListener('input',event=>{state.query=event.target.value.toLowerCase();drawRoster();});
+        window.addEventListener('openai:set_globals',event=>{
+          const next=event.detail?.globals?.widgetState?.modelContent?.mockupSelections?.[design];
+          if(!next)return;
+          const index=players.findIndex(player=>player.name===next.player);
+          if(index>=0)state.player=index;
+          if(metrics.some(metric=>metric.key===next.metric))state.metric=next.metric;
+          if(['2026','2025','2024'].includes(next.season)){state.season=next.season;picker.value=state.season;}
+          render();
+        });
+        render();
+        if(globalThis.Tweak){
+          const style={accent:design==='editorial'?'#bb401f':design==='film'?'#b4c98e':'#3865bd',radius:2,rowSpace:13};
+          const tweak=new Tweak({container:product,onChange:()=>{product.style.setProperty('--brand',style.accent);product.style.setProperty('--tile-radius',style.radius+'px');product.style.setProperty('--row-space',style.rowSpace+'px');}});
+          tweak.addColorPicker(style,'accent',{label:'Accent',reference:'--brand'});
+          if(design==='film') tweak.addSlider(style,'radius',{label:'Game tile corners',min:0,max:16,unit:'px'});
+          if(design==='box') tweak.addSlider(style,'rowSpace',{label:'Row spacing',min:8,max:20,unit:'px'});
+        }
+      });
+    })();
+  </script>
+</div>

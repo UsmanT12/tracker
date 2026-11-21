@@ -3,6 +3,8 @@ import { Database, RefreshCw } from "lucide-react";
 import { PlayerSearch } from "@/components/player-search";
 import { getPlayers, getSeasons } from "@/lib/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   try {
     const seasons = await getSeasons();

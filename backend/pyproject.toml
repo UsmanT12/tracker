@@ -33,6 +33,9 @@ wnba-ingest = "app.ingestion.cli:app"
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
 
+[tool.vercel]
+entrypoint = "app.main:app"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"

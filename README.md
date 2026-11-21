@@ -147,6 +147,59 @@ npm run dev
 Open `http://localhost:3000`. Select a player, season, and statistic to compare
 every valid game against the weighted or arithmetic season baseline.
 
+The frontend proxies `/api/v1` to the local backend. To use a separate API host,
+set `NEXT_PUBLIC_API_BASE_URL` in `frontend/.env.local`; Next.js does not load the
+repository root's `.env` file.
+
+## Deploy to Vercel with Supabase
+
+The root `vercel.json` deploys Next.js and FastAPI together using
+[Vercel Services](https://vercel.com/docs/services). Browser requests use
+`/api/v1` on the site's own domain. Server-rendered pages use the backend URL
+that Vercel supplies through the `BACKEND_URL` service binding. Data pages render
+at request time, so a build never needs the live API or database.
+
+1. Push the deployment files to GitHub and import this repository as a new
+   Vercel project.
+2. Keep **Root Directory** at the repository root (`.`), and choose the
+   **Services** framework preset. Do not select `frontend/` or `backend/` as
+   the project root. Leave the project's build and install overrides unset;
+   each service uses its framework's defaults.
+3. Add a sensitive **Production** environment variable named `DATABASE_URL`.
+   Copy its working value from the local root `.env`, without the
+   `DATABASE_URL=` prefix. For the Supabase session pooler, its format is:
+
+   ```text
+   postgresql+psycopg://postgres.PROJECT_REF:URL_ENCODED_PASSWORD@POOLER_HOST:5432/postgres?sslmode=require
+   ```
+
+   The database password belongs only in Vercel's environment settings.
+   `.env` files are ignored by Git and excluded from CLI uploads. Never put
+   the database URL in a `NEXT_PUBLIC_*` variable.
+4. Leave `NEXT_PUBLIC_API_BASE_URL` and `BACKEND_URL` unset in the dashboard.
+   The browser uses the same origin, and the service binding generates
+   `BACKEND_URL` automatically. Same-origin browser requests do not require
+   adding Vercel preview domains to `CORS_ORIGINS`.
+5. Deploy, then check `https://YOUR_DOMAIN/api/v1/health`,
+   `/api/v1/data-status`, and the homepage. Open a player and switch a stat
+   and season to verify both server and browser requests.
+
+The Supabase database must already have its schema and imported data. A database
+restored from this app's local database includes `alembic_version`; deploying
+does not restore or overwrite data. Run future Alembic migrations explicitly
+from the backend environment against the intended database before deploying
+code that needs them.
+
+To test a Vercel Preview deployment, configure `DATABASE_URL` in the **Preview**
+environment too. A separate Supabase database can be used for Preview. With the
+same URL, Preview reads the same data as Production; this app's API exposes only
+read operations.
+
+Continue running the Selenium scraper locally with the Supabase `DATABASE_URL`
+and `--no-headless`. It is a separate command, not a web request or a deployment
+build step. On Vercel, FastAPI uses Supabase's connection pooler without retaining
+an additional idle SQLAlchemy connection pool in each serverless instance.
+
 ## Tests and checks
 
 ```bash

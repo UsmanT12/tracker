@@ -6,10 +6,21 @@ import type {
 } from "./types";
 
 export const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
+
+function apiBaseUrl(): string {
+  if (typeof window !== "undefined") return API_BASE;
+
+  // Vercel injects this deployment's backend URL at runtime, only on the server.
+  if (process.env.BACKEND_URL) {
+    return `${process.env.BACKEND_URL.replace(/\/$/, "")}/api/v1`;
+  }
+
+  return process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api/v1";
+}
 
 async function apiFetch<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, { cache: "no-store" });
+  const response = await fetch(`${apiBaseUrl()}${path}`, { cache: "no-store" });
   if (!response.ok) {
     const payload = (await response.json().catch(() => null)) as { detail?: string } | null;
     throw new Error(payload?.detail ?? `Request failed with status ${response.status}`);

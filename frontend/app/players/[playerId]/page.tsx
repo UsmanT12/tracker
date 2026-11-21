@@ -3,6 +3,8 @@ import Link from "next/link";
 import { PlayerPerformanceExplorer } from "@/components/player-performance-explorer";
 import { getPerformance, getSeasons } from "@/lib/api";
 
+export const dynamic = "force-dynamic";
+
 export default async function PlayerPage({
   params,
   searchParams,

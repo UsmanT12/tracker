@@ -1,0 +1,225 @@
+<div id="baseline-home-mocks">
+  <style>
+    #baseline-home-mocks { color-scheme:dark; }
+    #baseline-home-mocks * { box-sizing:border-box; }
+    #baseline-home-mocks [hidden] { display:none !important; }
+    #baseline-home-mocks .home { --bg:#0b0a10; --surface:#15131c; --raised:#1c1925; --line:#302b3d; --text:#f6f3fb; --muted:#aaa2b8; --violet:#9d7cff; --green:#65d6a6; --red:#ff7b8b; --amber:#d9b86c; background:var(--bg); color:var(--text); min-height:900px; font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+    #baseline-home-mocks .home button, #baseline-home-mocks .home input, #baseline-home-mocks .home select { font:inherit; color:inherit; }
+    #baseline-home-mocks .home button { cursor:pointer; }
+    #baseline-home-mocks .nav { min-height:72px; display:flex; align-items:center; gap:14px; padding:0 32px; border-bottom:1px solid var(--line); }
+    #baseline-home-mocks .brand { display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; letter-spacing:-.6px; }
+    #baseline-home-mocks .brand i { width:8px; height:21px; display:block; background:var(--violet); border-radius:2px; transform:skew(-13deg); }
+    #baseline-home-mocks .nav-divider { width:1px; height:16px; background:var(--line); margin:0 9px; }
+    #baseline-home-mocks .nav-title { color:var(--muted); font-size:12px; }
+    #baseline-home-mocks .nav-end { margin-left:auto; font:11px ui-monospace,SFMono-Regular,monospace; color:var(--muted); }
+    #baseline-home-mocks .content { padding:38px 32px 26px; }
+    #baseline-home-mocks h1, #baseline-home-mocks h2, #baseline-home-mocks h3, #baseline-home-mocks p { margin:0; }
+    #baseline-home-mocks .eyebrow { color:var(--violet); text-transform:uppercase; letter-spacing:.1em; font-size:10px; font-weight:650; }
+    #baseline-home-mocks h1 { font-size:34px; line-height:1.15; font-weight:650; letter-spacing:-1.2px; margin:9px 0 10px; }
+    #baseline-home-mocks .subtitle { color:var(--muted); font-size:13px; }
+    #baseline-home-mocks .heading { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; }
+    #baseline-home-mocks .date-note { color:var(--muted); font-size:11px; text-align:right; }
+    #baseline-home-mocks .date-note strong { display:block; color:var(--text); font-weight:500; font-size:13px; margin-top:4px; }
+    #baseline-home-mocks .status-line { display:flex; gap:20px; flex-wrap:wrap; color:var(--muted); font:11px ui-monospace,SFMono-Regular,monospace; margin-top:26px; padding-top:16px; border-top:1px solid var(--line); }
+    #baseline-home-mocks .status-line strong { font-weight:500; color:var(--text); }
+    #baseline-home-mocks .status-line .data-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--green); vertical-align:middle; margin-right:6px; }
+    #baseline-home-mocks .toolbar { display:flex; gap:12px; margin-top:28px; }
+    #baseline-home-mocks .search-field { flex:1; display:flex; align-items:center; gap:10px; border:1px solid var(--line); background:var(--surface); padding:0 14px; border-radius:var(--corner,5px); min-width:0; }
+    #baseline-home-mocks .search-field svg { color:var(--muted); width:16px; height:16px; flex-shrink:0; }
+    #baseline-home-mocks .search-field input { width:100%; min-width:0; padding:12px 0; background:none; border:0; outline-offset:5px; }
+    #baseline-home-mocks .search-field input::placeholder { color:#827a91; }
+    #baseline-home-mocks .season { background:var(--surface); border:1px solid var(--line); border-radius:var(--corner,5px); padding:10px 14px; min-width:110px; }
+    #baseline-home-mocks .section-head { display:flex; justify-content:space-between; align-items:center; gap:15px; margin:27px 0 13px; }
+    #baseline-home-mocks .section-head h2 { font-size:14px; font-weight:600; }
+    #baseline-home-mocks .result-count { font-size:11px; color:var(--muted); }
+    #baseline-home-mocks .players { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    #baseline-home-mocks .player { display:block; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:var(--corner,5px); padding:18px; min-width:0; transition:background .15s; }
+    #baseline-home-mocks .player:hover, #baseline-home-mocks .player[aria-expanded=true] { background:var(--raised); border-color:var(--violet); }
+    #baseline-home-mocks .player-team { color:var(--muted); font-size:10px; letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; gap:5px; }
+    #baseline-home-mocks .player-team .arrow { font-size:16px; line-height:1; color:var(--violet); }
+    #baseline-home-mocks .player-name { display:block; margin:10px 0 17px; font-size:17px; font-weight:600; letter-spacing:-.4px; }
+    #baseline-home-mocks .player-stats { display:flex; gap:17px; }
+    #baseline-home-mocks .player-stats span { display:flex; flex-direction:column; gap:2px; }
+    #baseline-home-mocks .player-stats b { font-size:16px; font-weight:550; font-variant-numeric:tabular-nums; }
+    #baseline-home-mocks .player-stats small { color:var(--muted); font-size:10px; }
+    #baseline-home-mocks .footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:26px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:10px; }
+    #baseline-home-mocks .empty { padding:34px 0; color:var(--muted); grid-column:1/-1; }
+    #baseline-home-mocks .directory .heading { align-items:center; }
+    #baseline-home-mocks .directory .toolbar { border-top:1px solid var(--line); padding-top:22px; }
+    #baseline-home-mocks .directory .search-field { max-width:390px; }
+    #baseline-home-mocks .directory .toolbar .season { margin-left:auto; }
+    #baseline-home-mocks .directory .content { padding-top:30px; }
+    #baseline-home-mocks .table-wrap { overflow-x:auto; }
+    #baseline-home-mocks .directory table { width:100%; border-collapse:collapse; text-align:left; font-size:13px; }
+    #baseline-home-mocks .directory th { color:var(--muted); background:var(--surface); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.07em; padding:12px; border-bottom:1px solid var(--line); }
+    #baseline-home-mocks .directory th:first-child { border-radius:4px 0 0 4px; }
+    #baseline-home-mocks .directory td { padding:15px 12px; border-bottom:1px solid var(--line); }
+    #baseline-home-mocks .directory .rank { color:#827a91; font:11px ui-monospace,SFMono-Regular,monospace; }
+    #baseline-home-mocks .directory .table-name { background:none; border:0; padding:0; text-align:left; font-weight:550; }
+    #baseline-home-mocks .directory .table-name:hover { color:var(--violet); }
+    #baseline-home-mocks .directory .team-cell { color:var(--muted); font-size:12px; }
+    #baseline-home-mocks .directory .num { text-align:right; font-variant-numeric:tabular-nums; }
+    #baseline-home-mocks .directory .points { color:#c8b5ff; }
+    #baseline-home-mocks .split-shell { display:grid; grid-template-columns:235px minmax(0,1fr); min-height:778px; }
+    #baseline-home-mocks .sidebar { border-right:1px solid var(--line); padding:36px 26px; background:#100e16; }
+    #baseline-home-mocks .sidebar h1 { font-size:28px; line-height:1.2; margin-bottom:16px; }
+    #baseline-home-mocks .sidebar .subtitle { font-size:12px; line-height:1.7; }
+    #baseline-home-mocks .sidebar .season-label { display:block; color:var(--muted); font-size:11px; margin:30px 0 8px; }
+    #baseline-home-mocks .sidebar .season { width:100%; }
+    #baseline-home-mocks .side-data { border-top:1px solid var(--line); margin-top:32px; padding-top:20px; }
+    #baseline-home-mocks .side-data div { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; margin-bottom:14px; }
+    #baseline-home-mocks .side-data strong { color:var(--text); font-weight:500; font-variant-numeric:tabular-nums; }
+    #baseline-home-mocks .sidebar .date-note { text-align:left; margin-top:26px; }
+    #baseline-home-mocks .split .content { padding:29px 25px; }
+    #baseline-home-mocks .split .toolbar { margin-top:0; }
+    #baseline-home-mocks .split .players { grid-template-columns:1fr; gap:0; }
+    #baseline-home-mocks .split .player { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:16px; padding:17px 0; border-radius:0; background:none; border:0; border-bottom:1px solid var(--line); }
+    #baseline-home-mocks .split .player-name { grid-column:1; grid-row:1; font-size:15px; margin:0; }
+    #baseline-home-mocks .split .player-team { grid-column:1; grid-row:2; text-transform:none; letter-spacing:0; margin-top:5px; font-size:11px; }
+    #baseline-home-mocks .split .player-stats { grid-column:2; grid-row:1/3; gap:21px; }
+    #baseline-home-mocks .split .player-stats span { align-items:flex-end; }
+    #baseline-home-mocks .split .player-team .arrow { display:none; }
+    #baseline-home-mocks .split .player:hover .player-name { color:var(--violet); }
+    #baseline-home-mocks .preview { margin-top:25px; padding-top:22px; border-top:1px solid var(--line); }
+    #baseline-home-mocks .preview-head { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+    #baseline-home-mocks .preview h3 { font-size:19px; margin-top:4px; font-weight:550; }
+    #baseline-home-mocks .preview .close { background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:6px 12px; color:var(--muted); font-size:12px; }
+    #baseline-home-mocks .legend { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:11px; margin:18px 0; }
+    #baseline-home-mocks .legend span { display:flex; align-items:center; gap:6px; }
+    #baseline-home-mocks .legend i { width:7px; height:7px; border-radius:1px; }
+    #baseline-home-mocks .preview-chart { display:flex; align-items:flex-end; gap:10px; height:150px; padding-top:22px; border-bottom:1px solid var(--line); position:relative; }
+    #baseline-home-mocks .preview-chart .baseline { position:absolute; bottom:62%; width:100%; border-top:1px dashed var(--violet); }
+    #baseline-home-mocks .preview-chart .bar { flex:1; position:relative; height:var(--height); background:var(--bar-color); border-radius:3px 3px 0 0; }
+    #baseline-home-mocks .preview-chart .bar span { position:absolute; width:100%; bottom:calc(100% + 4px); text-align:center; font-size:11px; color:var(--text); }
+    #baseline-home-mocks .preview-caption { display:flex; justify-content:space-between; gap:14px; margin-top:9px; color:var(--muted); font-size:11px; }
+    @media(max-width:760px) {
+      #baseline-home-mocks .home { min-height:1000px; }
+      #baseline-home-mocks .players { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #baseline-home-mocks .split-shell { grid-template-columns:185px minmax(0,1fr); }
+      #baseline-home-mocks .sidebar { padding:30px 18px; }
+      #baseline-home-mocks .sidebar h1 { font-size:25px; }
+      #baseline-home-mocks .split .content { padding-inline:20px; }
+      #baseline-home-mocks .split .player-stats { gap:12px; }
+      #baseline-home-mocks .split .player-stats b { font-size:14px; }
+      #baseline-home-mocks .split .player-name { font-size:14px; }
+      #baseline-home-mocks .directory table { min-width:560px; }
+    }
+    @media(max-width:520px) {
+      #baseline-home-mocks .home { min-height:1200px; }
+      #baseline-home-mocks .nav { padding-inline:18px; min-height:62px; }
+      #baseline-home-mocks .nav-end { display:none; }
+      #baseline-home-mocks .nav-title { font-size:11px; }
+      #baseline-home-mocks .content { padding:26px 18px; }
+      #baseline-home-mocks h1 { font-size:29px; }
+      #baseline-home-mocks .heading { display:block; }
+      #baseline-home-mocks .heading .date-note { text-align:left; margin-top:16px; }
+      #baseline-home-mocks .heading .date-note strong { display:inline; margin-left:6px; }
+      #baseline-home-mocks .status-line { gap:12px; line-height:1.8; }
+      #baseline-home-mocks .toolbar { gap:8px; }
+      #baseline-home-mocks .season { min-width:85px; padding-inline:8px; }
+      #baseline-home-mocks .players { gap:9px; }
+      #baseline-home-mocks .player { padding:14px 11px; }
+      #baseline-home-mocks .player-name { font-size:14px; min-height:42px; margin-bottom:10px; }
+      #baseline-home-mocks .player-stats { gap:10px; }
+      #baseline-home-mocks .player-stats b { font-size:14px; }
+      #baseline-home-mocks .player-team { font-size:9px; min-height:27px; align-items:flex-start; }
+      #baseline-home-mocks .split-shell { display:block; }
+      #baseline-home-mocks .sidebar { border-right:0; border-bottom:1px solid var(--line); padding:24px 18px; }
+      #baseline-home-mocks .sidebar h1 { margin-bottom:10px; }
+      #baseline-home-mocks .sidebar h1 br { display:none; }
+      #baseline-home-mocks .sidebar .season-label { margin-top:15px; }
+      #baseline-home-mocks .sidebar .season { width:auto; }
+      #baseline-home-mocks .side-data { display:flex; gap:25px; margin-top:20px; padding-top:15px; }
+      #baseline-home-mocks .side-data div { gap:10px; margin:0; }
+      #baseline-home-mocks .sidebar .date-note { margin-top:15px; }
+      #baseline-home-mocks .split .content { padding-inline:18px; }
+      #baseline-home-mocks .split .player-name { min-height:0; margin:0; }
+      #baseline-home-mocks .split .player-team { min-height:0; }
+      #baseline-home-mocks .split .player { column-gap:8px; }
+      #baseline-home-mocks .split .player-stats { gap:10px; }
+      #baseline-home-mocks .directory .toolbar { flex-wrap:wrap; }
+      #baseline-home-mocks .directory .search-field { flex-basis:100%; }
+      #baseline-home-mocks .directory .toolbar .season { margin-left:0; }
+      #baseline-home-mocks .preview-chart { gap:6px; }
+    }
+    @media(pointer:coarse) { #baseline-home-mocks .home input,#baseline-home-mocks .home select {font-size:16px;} #baseline-home-mocks .table-name,#baseline-home-mocks .close {min-height:44px;} }
+  </style>
+  <div class="viz-carousel" aria-label="Homepage layouts in the original Baseline color scheme">
+    <section data-variant="Player Grid" aria-label="Player Grid homepage">
+      <div class="home grid" data-layout="grid" aria-label="Player Grid appearance">
+        <header class="nav"><div class="brand"><i aria-hidden="true"></i>Baseline</div><span class="nav-divider"></span><span class="nav-title">WNBA performance explorer</span><span class="nav-end">2024 — 2026</span></header>
+        <main class="content">
+          <div class="heading"><div><p class="eyebrow">The player index</p><h1>WNBA players</h1><p class="subtitle">Choose a player to explore every game against their season average.</p></div><div class="date-note">Data available through<strong>Oct 31, 2026</strong></div></div>
+          <div class="status-line"><span><strong>443</strong> players in archive</span><span><strong>977</strong> games</span><span><i class="data-dot"></i>Updated Nov 21</span></div>
+          <div class="toolbar"><label class="search-field"><i data-lucide="search" aria-hidden="true"></i><input type="search" placeholder="Search by player name" aria-label="Search Player Grid"></label><select class="season" aria-label="Player Grid season"><option>2026</option><option>2025</option><option>2024</option></select></div>
+          <div class="section-head"><h2><span class="current-season">2026</span> season</h2><span class="result-count"></span></div><div class="players"></div><div class="preview" hidden></div>
+          <footer class="footer"><span>Player Grid · Flat cards / compact header</span><span>Mockup · Sample player statistics</span></footer>
+        </main>
+      </div>
+    </section>
+    <section data-variant="Player Directory" aria-label="Player Directory homepage" hidden>
+      <div class="home directory" data-layout="directory" aria-label="Player Directory appearance">
+        <header class="nav"><div class="brand"><i aria-hidden="true"></i>Baseline</div><span class="nav-divider"></span><span class="nav-title">Player directory</span><span class="nav-end">WNBA / STATISTICAL ARCHIVE</span></header>
+        <main class="content">
+          <div class="heading"><div><p class="eyebrow">WNBA / <span class="current-season">2026</span></p><h1>Player directory</h1><p class="subtitle">Season averages, with every game one click away.</p></div><div class="date-note">Archive<strong>443 players · 977 games</strong></div></div>
+          <div class="toolbar"><label class="search-field"><i data-lucide="search" aria-hidden="true"></i><input type="search" placeholder="Search by player name" aria-label="Search Player Directory"></label><select class="season" aria-label="Player Directory season"><option>2026</option><option>2025</option><option>2024</option></select></div>
+          <div class="section-head"><h2>Season averages</h2><span class="result-count"></span></div><div class="table-wrap"><table aria-label="Player season averages"><thead><tr><th>#</th><th>Player</th><th>Team</th><th class="num">GP</th><th class="num">PPG</th><th class="num">RPG</th><th class="num">APG</th></tr></thead><tbody></tbody></table></div><div class="preview" hidden></div>
+          <footer class="footer"><span>Player Directory · Rows / alignment / less chrome</span><span>Mockup · Sample player statistics</span></footer>
+        </main>
+      </div>
+    </section>
+    <section data-variant="Split Index" aria-label="Split Index homepage" hidden>
+      <div class="home split" data-layout="split" aria-label="Split Index appearance">
+        <header class="nav"><div class="brand"><i aria-hidden="true"></i>Baseline</div><span class="nav-divider"></span><span class="nav-title">WNBA performance explorer</span><span class="nav-end">PLAYER INDEX</span></header>
+        <div class="split-shell"><aside class="sidebar"><p class="eyebrow">WNBA archive</p><h1>Player<br>performance.</h1><p class="subtitle">Every game compared with the player's season average.</p><label class="season-label" for="split-home-season">Season</label><select id="split-home-season" class="season"><option>2026</option><option>2025</option><option>2024</option></select><div class="side-data"><div>Players<strong>443</strong></div><div>Games<strong>977</strong></div></div><p class="date-note">Data available through<strong>Oct 31, 2026</strong></p></aside>
+          <main class="content"><div class="toolbar"><label class="search-field"><i data-lucide="search" aria-hidden="true"></i><input type="search" placeholder="Search by player name" aria-label="Search Split Index"></label></div><div class="section-head"><h2><span class="current-season">2026</span> players</h2><span class="result-count"></span></div><div class="players"></div><div class="preview" hidden></div><footer class="footer"><span>Split Index · Archive rail / compact roster</span><span>Mockup · Sample statistics</span></footer></main>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+  (()=>{
+    const root=document.getElementById('baseline-home-mocks');
+    const players=[
+      {name:'A’ja Wilson',team:'Las Vegas Aces',gp:49,stats:[25.9,9.1,2.9]},
+      {name:'Caitlin Clark',team:'Indiana Fever',gp:40,stats:[22.4,5.6,8.7]},
+      {name:'Napheesa Collier',team:'Minnesota Lynx',gp:41,stats:[23.2,8.4,3.3]},
+      {name:'Breanna Stewart',team:'New York Liberty',gp:39,stats:[21.1,7.8,3.6]},
+      {name:'Sabrina Ionescu',team:'New York Liberty',gp:38,stats:[18.2,4.4,6.1]},
+      {name:'Alyssa Thomas',team:'Phoenix Mercury',gp:40,stats:[15.4,8.9,9.2]}
+    ];
+    root.querySelectorAll('[data-layout]').forEach(home=>{
+      const layout=home.dataset.layout;
+      const state={query:'',season:'2026'};
+      const container=home.querySelector('.players') || home.querySelector('tbody');
+      const preview=home.querySelector('.preview');
+      function el(tag,cls,text){const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;}
+      function showPlayer(player){
+        preview.hidden=false;preview.replaceChildren();
+        const head=el('div','preview-head');const title=el('div');title.append(el('p','eyebrow','Sample player preview'),el('h3','',player.name+' · '+state.season));const close=el('button','close','Close');close.type='button';close.addEventListener('click',()=>{preview.hidden=true;});head.append(title,close);preview.append(head);
+        const legend=el('div','legend');[['Above average','var(--green)'],['Near average','var(--amber)'],['Below average','var(--red)']].forEach(([text,color])=>{const item=el('span');const swatch=el('i');swatch.style.background=color;item.append(swatch,document.createTextNode(text));legend.append(item);});preview.append(legend);
+        const chart=el('div','preview-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Twelve sample point totals with green above average, amber near average, and red below average.');chart.append(el('div','baseline'));
+        const average=player.stats[0];const factors=[.77,1.2,.91,1.03,1.31,.69,1.08,.95,1.45,.84,1.16,1.01];
+        factors.forEach(f=>{const value=Math.round(average*f);const bar=el('div','bar');bar.style.setProperty('--height',value/(average*1.6)*100+'%');bar.style.setProperty('--bar-color',Math.abs(value-average)<2?'var(--amber)':value>average?'var(--green)':'var(--red)');bar.append(el('span','',String(value)));chart.append(bar);});preview.append(chart);const caption=el('div','preview-caption');caption.append(el('span','','Last 12 games · PTS'),el('span','','Season average: '+average.toFixed(1)));preview.append(caption);
+      }
+      function render(){
+        home.querySelectorAll('.current-season').forEach(node=>node.textContent=state.season);
+        const filtered=players.filter(player=>player.name.toLowerCase().includes(state.query));container.replaceChildren();
+        home.querySelector('.result-count').textContent=filtered.length+' sample players';
+        if(!filtered.length){if(layout==='directory'){const row=el('tr');const cell=el('td','empty','No players match your search.');cell.colSpan=7;row.append(cell);container.append(row);}else container.append(el('p','empty','No players match your search.'));return;}
+        filtered.forEach(player=>{
+          if(layout==='directory'){
+            const row=el('tr');row.append(el('td','rank',String(players.indexOf(player)+1).padStart(2,'0')));const name=el('td');const button=el('button','table-name',player.name);button.type='button';button.addEventListener('click',()=>showPlayer(player));name.append(button);row.append(name,el('td','team-cell',player.team),el('td','num',String(player.gp)));player.stats.forEach((v,i)=>row.append(el('td','num'+(i===0?' points':''),v.toFixed(1))));container.append(row);
+          }else{
+            const button=el('button','player');button.type='button';button.setAttribute('aria-label','Preview '+player.name);const team=el('span','player-team',player.team);const arrow=el('span','arrow','↗');arrow.setAttribute('aria-hidden','true');team.append(arrow);const stats=el('span','player-stats');player.stats.forEach((v,i)=>{const s=el('span');s.append(el('b','',v.toFixed(1)),el('small','',['PPG','RPG','APG'][i]));stats.append(s);});button.append(team,el('span','player-name',player.name),stats);button.addEventListener('click',()=>showPlayer(player));container.append(button);
+          }
+        });
+      }
+      home.querySelector('input').addEventListener('input',event=>{state.query=event.target.value.toLowerCase();render();});
+      home.querySelector('.season').addEventListener('change',event=>{state.season=event.target.value;preview.hidden=true;render();});
+      render();
+      if(globalThis.Tweak){const styling={corner:5};const tweak=new Tweak({container:home,onChange:()=>home.style.setProperty('--corner',styling.corner+'px')});if(layout==='grid')tweak.addSlider(styling,'corner',{label:'Card corners',min:0,max:16,unit:'px'});}
+    });
+  })();
+  </script>
+</div>

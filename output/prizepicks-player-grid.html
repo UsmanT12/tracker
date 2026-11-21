@@ -1,0 +1,225 @@
+<div id="baseline-prizepicks-mock">
+  <style>
+    #baseline-prizepicks-mock { color-scheme:dark; }
+    #baseline-prizepicks-mock * { box-sizing:border-box; }
+    #baseline-prizepicks-mock [hidden] { display:none !important; }
+    #baseline-prizepicks-mock .home { --bg:#0b0a10; --surface:#15131c; --raised:#1c1925; --line:#302b3d; --text:#f6f3fb; --muted:#aaa2b8; --violet:#9d7cff; --green:#65d6a6; --red:#ff7b8b; --amber:#d9b86c; background:var(--bg); color:var(--text); min-height:900px; font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+    #baseline-prizepicks-mock .home button, #baseline-prizepicks-mock .home input, #baseline-prizepicks-mock .home select { font:inherit; color:inherit; }
+    #baseline-prizepicks-mock .home button { cursor:pointer; }
+    #baseline-prizepicks-mock .nav { min-height:72px; display:flex; align-items:center; gap:14px; padding:0 32px; border-bottom:1px solid var(--line); }
+    #baseline-prizepicks-mock .brand { display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; letter-spacing:-.6px; }
+    #baseline-prizepicks-mock .brand i { width:8px; height:21px; display:block; background:var(--violet); border-radius:2px; transform:skew(-13deg); }
+    #baseline-prizepicks-mock .nav-divider { width:1px; height:16px; background:var(--line); margin:0 9px; }
+    #baseline-prizepicks-mock .nav-title { color:var(--muted); font-size:12px; }
+    #baseline-prizepicks-mock .nav-end { margin-left:auto; font:11px ui-monospace,SFMono-Regular,monospace; color:var(--muted); }
+    #baseline-prizepicks-mock .content { padding:38px 32px 26px; }
+    #baseline-prizepicks-mock h1, #baseline-prizepicks-mock h2, #baseline-prizepicks-mock h3, #baseline-prizepicks-mock p { margin:0; }
+    #baseline-prizepicks-mock .eyebrow { color:var(--violet); text-transform:uppercase; letter-spacing:.1em; font-size:10px; font-weight:650; }
+    #baseline-prizepicks-mock h1 { font-size:34px; line-height:1.15; font-weight:650; letter-spacing:-1.2px; margin:9px 0 10px; }
+    #baseline-prizepicks-mock .subtitle { color:var(--muted); font-size:13px; }
+    #baseline-prizepicks-mock .heading { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; }
+    #baseline-prizepicks-mock .date-note { color:var(--muted); font-size:11px; text-align:right; }
+    #baseline-prizepicks-mock .date-note strong { display:block; color:var(--text); font-weight:500; font-size:13px; margin-top:4px; }
+    #baseline-prizepicks-mock .status-line { display:flex; gap:20px; flex-wrap:wrap; color:var(--muted); font:11px ui-monospace,SFMono-Regular,monospace; margin-top:26px; padding-top:16px; border-top:1px solid var(--line); }
+    #baseline-prizepicks-mock .status-line strong { font-weight:500; color:var(--text); }
+    #baseline-prizepicks-mock .status-line .data-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--green); vertical-align:middle; margin-right:6px; }
+    #baseline-prizepicks-mock .toolbar { display:flex; gap:12px; margin-top:28px; }
+    #baseline-prizepicks-mock .search-field { flex:1; display:flex; align-items:center; gap:10px; border:1px solid var(--line); background:var(--surface); padding:0 14px; border-radius:var(--corner,5px); min-width:0; }
+    #baseline-prizepicks-mock .search-field svg { color:var(--muted); width:16px; height:16px; flex-shrink:0; }
+    #baseline-prizepicks-mock .search-field input { width:100%; min-width:0; padding:12px 0; background:none; border:0; outline-offset:5px; }
+    #baseline-prizepicks-mock .search-field input::placeholder { color:var(--muted); }
+    #baseline-prizepicks-mock .season { background:var(--surface); border:1px solid var(--line); border-radius:var(--corner,5px); padding:10px 14px; min-width:110px; }
+    #baseline-prizepicks-mock .section-head { display:flex; justify-content:space-between; align-items:center; gap:15px; margin:27px 0 13px; }
+    #baseline-prizepicks-mock .section-head h2 { font-size:14px; font-weight:600; }
+    #baseline-prizepicks-mock .result-count { font-size:11px; color:var(--muted); }
+    #baseline-prizepicks-mock .players { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    #baseline-prizepicks-mock .player { display:block; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:var(--corner,5px); padding:18px; min-width:0; transition:background .15s; }
+    #baseline-prizepicks-mock .player:hover, #baseline-prizepicks-mock .player[aria-expanded=true] { background:var(--raised); border-color:var(--violet); }
+    #baseline-prizepicks-mock .player-team { color:var(--muted); font-size:10px; letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; gap:5px; }
+    #baseline-prizepicks-mock .player-team .arrow { font-size:16px; line-height:1; color:var(--violet); }
+    #baseline-prizepicks-mock .player-name { display:block; margin:10px 0 17px; font-size:17px; font-weight:600; letter-spacing:-.4px; }
+    #baseline-prizepicks-mock .player-stats { display:flex; gap:17px; }
+    #baseline-prizepicks-mock .player-stats span { display:flex; flex-direction:column; gap:2px; }
+    #baseline-prizepicks-mock .player-stats b { font-size:16px; font-weight:550; font-variant-numeric:tabular-nums; }
+    #baseline-prizepicks-mock .player-stats small { color:var(--muted); font-size:10px; }
+    #baseline-prizepicks-mock .footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:26px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:10px; }
+    #baseline-prizepicks-mock .empty { padding:34px 0; color:var(--muted); grid-column:1/-1; }
+    #baseline-prizepicks-mock .directory .heading { align-items:center; }
+    #baseline-prizepicks-mock .directory .toolbar { border-top:1px solid var(--line); padding-top:22px; }
+    #baseline-prizepicks-mock .directory .search-field { max-width:390px; }
+    #baseline-prizepicks-mock .directory .toolbar .season { margin-left:auto; }
+    #baseline-prizepicks-mock .directory .content { padding-top:30px; }
+    #baseline-prizepicks-mock .table-wrap { overflow-x:auto; }
+    #baseline-prizepicks-mock .directory table { width:100%; border-collapse:collapse; text-align:left; font-size:13px; }
+    #baseline-prizepicks-mock .directory th { color:var(--muted); background:var(--surface); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.07em; padding:12px; border-bottom:1px solid var(--line); }
+    #baseline-prizepicks-mock .directory th:first-child { border-radius:4px 0 0 4px; }
+    #baseline-prizepicks-mock .directory td { padding:15px 12px; border-bottom:1px solid var(--line); }
+    #baseline-prizepicks-mock .directory .rank { color:#827a91; font:11px ui-monospace,SFMono-Regular,monospace; }
+    #baseline-prizepicks-mock .directory .table-name { background:none; border:0; padding:0; text-align:left; font-weight:550; }
+    #baseline-prizepicks-mock .directory .table-name:hover { color:var(--violet); }
+    #baseline-prizepicks-mock .directory .team-cell { color:var(--muted); font-size:12px; }
+    #baseline-prizepicks-mock .directory .num { text-align:right; font-variant-numeric:tabular-nums; }
+    #baseline-prizepicks-mock .directory .points { color:#c8b5ff; }
+    #baseline-prizepicks-mock .split-shell { display:grid; grid-template-columns:235px minmax(0,1fr); min-height:778px; }
+    #baseline-prizepicks-mock .sidebar { border-right:1px solid var(--line); padding:36px 26px; background:#100e16; }
+    #baseline-prizepicks-mock .sidebar h1 { font-size:28px; line-height:1.2; margin-bottom:16px; }
+    #baseline-prizepicks-mock .sidebar .subtitle { font-size:12px; line-height:1.7; }
+    #baseline-prizepicks-mock .sidebar .season-label { display:block; color:var(--muted); font-size:11px; margin:30px 0 8px; }
+    #baseline-prizepicks-mock .sidebar .season { width:100%; }
+    #baseline-prizepicks-mock .side-data { border-top:1px solid var(--line); margin-top:32px; padding-top:20px; }
+    #baseline-prizepicks-mock .side-data div { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; margin-bottom:14px; }
+    #baseline-prizepicks-mock .side-data strong { color:var(--text); font-weight:500; font-variant-numeric:tabular-nums; }
+    #baseline-prizepicks-mock .sidebar .date-note { text-align:left; margin-top:26px; }
+    #baseline-prizepicks-mock .split .content { padding:29px 25px; }
+    #baseline-prizepicks-mock .split .toolbar { margin-top:0; }
+    #baseline-prizepicks-mock .split .players { grid-template-columns:1fr; gap:0; }
+    #baseline-prizepicks-mock .split .player { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:16px; padding:17px 0; border-radius:0; background:none; border:0; border-bottom:1px solid var(--line); }
+    #baseline-prizepicks-mock .split .player-name { grid-column:1; grid-row:1; font-size:15px; margin:0; }
+    #baseline-prizepicks-mock .split .player-team { grid-column:1; grid-row:2; text-transform:none; letter-spacing:0; margin-top:5px; font-size:11px; }
+    #baseline-prizepicks-mock .split .player-stats { grid-column:2; grid-row:1/3; gap:21px; }
+    #baseline-prizepicks-mock .split .player-stats span { align-items:flex-end; }
+    #baseline-prizepicks-mock .split .player-team .arrow { display:none; }
+    #baseline-prizepicks-mock .split .player:hover .player-name { color:var(--violet); }
+    #baseline-prizepicks-mock .preview { margin-top:25px; padding-top:22px; border-top:1px solid var(--line); }
+    #baseline-prizepicks-mock .preview-head { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+    #baseline-prizepicks-mock .preview h3 { font-size:19px; margin-top:4px; font-weight:550; }
+    #baseline-prizepicks-mock .preview .close { background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:6px 12px; color:var(--muted); font-size:12px; }
+    #baseline-prizepicks-mock .legend { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:11px; margin:18px 0; }
+    #baseline-prizepicks-mock .legend span { display:flex; align-items:center; gap:6px; }
+    #baseline-prizepicks-mock .legend i { width:7px; height:7px; border-radius:1px; }
+    #baseline-prizepicks-mock .preview-chart { display:flex; align-items:flex-end; gap:10px; height:150px; padding-top:22px; border-bottom:1px solid var(--line); position:relative; }
+    #baseline-prizepicks-mock .preview-chart .baseline { position:absolute; bottom:62%; width:100%; border-top:1px dashed var(--violet); }
+    #baseline-prizepicks-mock .preview-chart .bar { flex:1; position:relative; height:var(--height); background:var(--bar-color); border-radius:3px 3px 0 0; }
+    #baseline-prizepicks-mock .preview-chart .bar span { position:absolute; width:100%; bottom:calc(100% + 4px); text-align:center; font-size:11px; color:var(--text); }
+    #baseline-prizepicks-mock .preview-caption { display:flex; justify-content:space-between; gap:14px; margin-top:9px; color:var(--muted); font-size:11px; }
+    @media(max-width:760px) {
+      #baseline-prizepicks-mock .home { min-height:1000px; }
+      #baseline-prizepicks-mock .players { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #baseline-prizepicks-mock .split-shell { grid-template-columns:185px minmax(0,1fr); }
+      #baseline-prizepicks-mock .sidebar { padding:30px 18px; }
+      #baseline-prizepicks-mock .sidebar h1 { font-size:25px; }
+      #baseline-prizepicks-mock .split .content { padding-inline:20px; }
+      #baseline-prizepicks-mock .split .player-stats { gap:12px; }
+      #baseline-prizepicks-mock .split .player-stats b { font-size:14px; }
+      #baseline-prizepicks-mock .split .player-name { font-size:14px; }
+      #baseline-prizepicks-mock .directory table { min-width:560px; }
+    }
+    @media(max-width:520px) {
+      #baseline-prizepicks-mock .home { min-height:1200px; }
+      #baseline-prizepicks-mock .nav { padding-inline:18px; min-height:62px; }
+      #baseline-prizepicks-mock .nav-end { display:none; }
+      #baseline-prizepicks-mock .nav-title { font-size:11px; }
+      #baseline-prizepicks-mock .content { padding:26px 18px; }
+      #baseline-prizepicks-mock h1 { font-size:29px; }
+      #baseline-prizepicks-mock .heading { display:block; }
+      #baseline-prizepicks-mock .heading .date-note { text-align:left; margin-top:16px; }
+      #baseline-prizepicks-mock .heading .date-note strong { display:inline; margin-left:6px; }
+      #baseline-prizepicks-mock .status-line { gap:12px; line-height:1.8; }
+      #baseline-prizepicks-mock .toolbar { gap:8px; }
+      #baseline-prizepicks-mock .season { min-width:85px; padding-inline:8px; }
+      #baseline-prizepicks-mock .players { gap:9px; }
+      #baseline-prizepicks-mock .player { padding:14px 11px; }
+      #baseline-prizepicks-mock .player-name { font-size:14px; min-height:42px; margin-bottom:10px; }
+      #baseline-prizepicks-mock .player-stats { gap:10px; }
+      #baseline-prizepicks-mock .player-stats b { font-size:14px; }
+      #baseline-prizepicks-mock .player-team { font-size:9px; min-height:27px; align-items:flex-start; }
+      #baseline-prizepicks-mock .split-shell { display:block; }
+      #baseline-prizepicks-mock .sidebar { border-right:0; border-bottom:1px solid var(--line); padding:24px 18px; }
+      #baseline-prizepicks-mock .sidebar h1 { margin-bottom:10px; }
+      #baseline-prizepicks-mock .sidebar h1 br { display:none; }
+      #baseline-prizepicks-mock .sidebar .season-label { margin-top:15px; }
+      #baseline-prizepicks-mock .sidebar .season { width:auto; }
+      #baseline-prizepicks-mock .side-data { display:flex; gap:25px; margin-top:20px; padding-top:15px; }
+      #baseline-prizepicks-mock .side-data div { gap:10px; margin:0; }
+      #baseline-prizepicks-mock .sidebar .date-note { margin-top:15px; }
+      #baseline-prizepicks-mock .split .content { padding-inline:18px; }
+      #baseline-prizepicks-mock .split .player-name { min-height:0; margin:0; }
+      #baseline-prizepicks-mock .split .player-team { min-height:0; }
+      #baseline-prizepicks-mock .split .player { column-gap:8px; }
+      #baseline-prizepicks-mock .split .player-stats { gap:10px; }
+      #baseline-prizepicks-mock .directory .toolbar { flex-wrap:wrap; }
+      #baseline-prizepicks-mock .directory .search-field { flex-basis:100%; }
+      #baseline-prizepicks-mock .directory .toolbar .season { margin-left:0; }
+      #baseline-prizepicks-mock .preview-chart { gap:6px; }
+    }
+    @media(pointer:coarse) { #baseline-prizepicks-mock .home input,#baseline-prizepicks-mock .home select {font-size:16px;} #baseline-prizepicks-mock .table-name,#baseline-prizepicks-mock .close {min-height:44px;} }
+  
+
+
+
+
+
+
+#baseline-prizepicks-mock .home[data-palette=prizepicks] { --bg:#050614; --surface:#121320; --raised:#1f202d; --line:#393945; --text:#fbf9ff; --muted:#bab9c1; --violet:#ad8bfb; --brand:#8000ff; --lime:#6eff00; color-scheme:dark; }
+#baseline-prizepicks-mock .brand i { background:var(--brand); }
+#baseline-prizepicks-mock .nav-title { color:var(--text); border-bottom:2px solid var(--brand); padding:24px 0; }
+#baseline-prizepicks-mock .player-team .arrow { color:var(--lime); }
+#baseline-prizepicks-mock .player:hover { border-color:var(--brand); }
+#baseline-prizepicks-mock .search-field:focus-within { border-color:var(--lime); }
+#baseline-prizepicks-mock .season { color:var(--lime); }
+#baseline-prizepicks-mock .player { border-radius:8px; }
+
+#baseline-prizepicks-mock .home { min-height:720px; }
+#baseline-prizepicks-mock .heading h1 { margin:0; font-size:29px; }
+#baseline-prizepicks-mock .section-head { margin:16px 0 13px; justify-content:flex-end; }
+@media(max-width:760px) { #baseline-prizepicks-mock .home { min-height:820px; } }
+@media(max-width:520px) { #baseline-prizepicks-mock .home { min-height:940px; } }
+</style>
+  <section aria-label="Baseline player grid with the PrizePicks color palette">
+      <div class="home grid" data-layout="grid" aria-label="PrizePicks color scheme" data-palette="prizepicks">
+        <header class="nav"><div class="brand"><i aria-hidden="true"></i>Baseline</div></header>
+        <main class="content">
+          <div class="heading"><div><h1>Players</h1></div></div>
+          
+          <div class="toolbar"><label class="search-field"><i data-lucide="search" aria-hidden="true"></i><input type="search" placeholder="Search by player name" aria-label="Search players"></label><select class="season" aria-label="Season"><option>2026</option><option>2025</option><option>2024</option></select></div>
+          <div class="section-head" aria-label="Player results"><span class="result-count"></span></div><div class="players"></div><div class="preview" hidden=""></div>
+          
+        </main>
+      </div>
+    </section>
+  <script>
+  (()=>{
+    const root=document.getElementById('baseline-prizepicks-mock');
+    const players=[
+      {name:'A’ja Wilson',team:'Las Vegas Aces',gp:49,stats:[25.9,9.1,2.9]},
+      {name:'Caitlin Clark',team:'Indiana Fever',gp:40,stats:[22.4,5.6,8.7]},
+      {name:'Napheesa Collier',team:'Minnesota Lynx',gp:41,stats:[23.2,8.4,3.3]},
+      {name:'Breanna Stewart',team:'New York Liberty',gp:39,stats:[21.1,7.8,3.6]},
+      {name:'Sabrina Ionescu',team:'New York Liberty',gp:38,stats:[18.2,4.4,6.1]},
+      {name:'Alyssa Thomas',team:'Phoenix Mercury',gp:40,stats:[15.4,8.9,9.2]}
+    ];
+    root.querySelectorAll('[data-layout]').forEach(home=>{
+      const layout=home.dataset.layout;
+      const state={query:'',season:'2026'};
+      const container=home.querySelector('.players') || home.querySelector('tbody');
+      const preview=home.querySelector('.preview');
+      function el(tag,cls,text){const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;}
+      function showPlayer(player){
+        preview.hidden=false;preview.replaceChildren();
+        const head=el('div','preview-head');const title=el('div');title.append(el('p','eyebrow','Sample player preview'),el('h3','',player.name+' · '+state.season));const close=el('button','close','Close');close.type='button';close.addEventListener('click',()=>{preview.hidden=true;});head.append(title,close);preview.append(head);
+        const legend=el('div','legend');[['Above average','var(--green)'],['Near average','var(--amber)'],['Below average','var(--red)']].forEach(([text,color])=>{const item=el('span');const swatch=el('i');swatch.style.background=color;item.append(swatch,document.createTextNode(text));legend.append(item);});preview.append(legend);
+        const chart=el('div','preview-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Twelve sample point totals with green above average, amber near average, and red below average.');chart.append(el('div','baseline'));
+        const average=player.stats[0];const factors=[.77,1.2,.91,1.03,1.31,.69,1.08,.95,1.45,.84,1.16,1.01];
+        factors.forEach(f=>{const value=Math.round(average*f);const bar=el('div','bar');bar.style.setProperty('--height',value/(average*1.6)*100+'%');bar.style.setProperty('--bar-color',Math.abs(value-average)<2?'var(--amber)':value>average?'var(--green)':'var(--red)');bar.append(el('span','',String(value)));chart.append(bar);});preview.append(chart);const caption=el('div','preview-caption');caption.append(el('span','','Last 12 games · PTS'),el('span','','Season average: '+average.toFixed(1)));preview.append(caption);
+      }
+      function render(){
+        home.querySelectorAll('.current-season').forEach(node=>node.textContent=state.season);
+        const filtered=players.filter(player=>player.name.toLowerCase().includes(state.query));container.replaceChildren();
+        home.querySelector('.result-count').textContent=filtered.length+' players';
+        if(!filtered.length){if(layout==='directory'){const row=el('tr');const cell=el('td','empty','No players match your search.');cell.colSpan=7;row.append(cell);container.append(row);}else container.append(el('p','empty','No players match your search.'));return;}
+        filtered.forEach(player=>{
+          if(layout==='directory'){
+            const row=el('tr');row.append(el('td','rank',String(players.indexOf(player)+1).padStart(2,'0')));const name=el('td');const button=el('button','table-name',player.name);button.type='button';button.addEventListener('click',()=>showPlayer(player));name.append(button);row.append(name,el('td','team-cell',player.team),el('td','num',String(player.gp)));player.stats.forEach((v,i)=>row.append(el('td','num'+(i===0?' points':''),v.toFixed(1))));container.append(row);
+          }else{
+            const button=el('button','player');button.type='button';button.setAttribute('aria-label','Preview '+player.name);const team=el('span','player-team',player.team);const arrow=el('span','arrow','↗');arrow.setAttribute('aria-hidden','true');team.append(arrow);const stats=el('span','player-stats');player.stats.forEach((v,i)=>{const s=el('span');s.append(el('b','',v.toFixed(1)),el('small','',['PPG','RPG','APG'][i]));stats.append(s);});button.append(team,el('span','player-name',player.name),stats);button.addEventListener('click',()=>showPlayer(player));container.append(button);
+          }
+        });
+      }
+      home.querySelector('input').addEventListener('input',event=>{state.query=event.target.value.toLowerCase();render();});
+      home.querySelector('.season').addEventListener('change',event=>{state.season=event.target.value;preview.hidden=true;render();});
+      render();
+      if(globalThis.Tweak){const computed=getComputedStyle(home);const styling={accent:computed.getPropertyValue('--violet').trim(),background:computed.getPropertyValue('--bg').trim()};const tweak=new Tweak({container:home,onChange:()=>{home.style.setProperty('--violet',styling.accent);home.style.setProperty('--bg',styling.background);}});tweak.addColorPicker(styling,'accent',{label:'Accent',reference:'--violet'});tweak.addColorPicker(styling,'background',{label:'Background',reference:'--bg'});}
+    });
+  })();
+  </script>
+</div>
